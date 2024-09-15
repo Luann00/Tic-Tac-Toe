@@ -39,7 +39,7 @@ createPlayer = (name, sign) => {
 
     let getWon = () => won
     let setWon = () => won = true;
-    let getName = () => sign;
+    let getName = () => name;
     let getSign = () => sign;
 
     let startRound = () => playRound(sign)
@@ -77,13 +77,15 @@ function playRound(sign) {
     gameBoard.setField(index, sign);
 
     if (index == 1 || index == 4 || index == 7) {
+        //check if all three vertical cells are filled with either x's oder o's
         if (gameBoard.getBoard()[0] == gameBoard.getBoard()[3] && gameBoard.getBoard()[0] == gameBoard.getBoard()[6]) {
             if (sign == "X") {
                 player1.setWon()
                 return;
             }
             player2.setWon()
-        } else if (gameBoard.getBoard()[index] == gameBoard.getBoard()[index + 1] && gameBoard.getBoard()[index] == gameBoard.getBoard()[index + 2]) {
+            //check if all three horicontal cells are filled with either x's oder o's
+        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 1]) {
             if (sign == "X") {
                 player1.setWon()
             }
@@ -94,13 +96,15 @@ function playRound(sign) {
 
 
     if (index == 8 || index == 5 || index == 2) {
+        //check if all three vertical cells are filled with either x's oder o's
         if (gameBoard.getBoard()[7] == gameBoard.getBoard()[4] && gameBoard.getBoard()[7] == gameBoard.getBoard()[1]) {
             if (sign == "X") {
                 player1.setWon()
                 return;
             }
             player2.setWon()
-        } else if (gameBoard.getBoard()[index] == gameBoard.getBoard()[index - 1] && gameBoard.getBoard()[index] == gameBoard.getBoard()[index + 1]) {
+            //check if all three horicontal cells are filled with either x's oder o's
+        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index]) {
             if (sign == "X") {
                 player1.setWon()
             }
@@ -111,13 +115,15 @@ function playRound(sign) {
 
 
     if (index == 9 || index == 6 || index == 3) {
+        //check if all three vertical cells are filled with either x's oder o's
         if (gameBoard.getBoard()[8] == gameBoard.getBoard()[5] && gameBoard.getBoard()[8] == gameBoard.getBoard()[2]) {
             if (sign == "X") {
                 player1.setWon()
                 return;
             }
             player2.setWon()
-        } else if (gameBoard.getBoard()[index] == gameBoard.getBoard()[index - 1] && gameBoard.getBoard()[index] == gameBoard.getBoard()[index - 2]) {
+            //check if all three horicontal cells are filled with either x's oder o's
+        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 3]) {
             if (sign == "X") {
                 player1.setWon()
             }
@@ -125,6 +131,9 @@ function playRound(sign) {
         }
 
     }
+
+    drawBoard();
+
 
 }
 
@@ -134,11 +143,18 @@ function playRound(sign) {
 function playGame() {
     while (!player1.getWon() && !player2.getWon() && !checkEnd()) {
         player1.startRound(player1.getSign());
-        if (checkEnd()) {
-            drawBoard();
+        if (checkEnd() || player1.getWon() || player2.getWon()) {
             break;
         }
         player2.startRound(player2.getSign());
+    }
+
+    if (player1.getWon()) {
+        console.log(`${player1.getName()} won the game!`)
+    } else if (player2.getWon()) {
+        console.log(`${player2.getName()} won the game!`)
+    } else {
+        console.log("Tie!")
     }
 
 }
