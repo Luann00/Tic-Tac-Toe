@@ -76,16 +76,21 @@ function playRound(sign) {
 
     gameBoard.setField(index, sign);
 
+
+
+    //check if all three vertical cells are filled with either x's oder o's
+    if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 7]) {
+        if (sign == "X") {
+            player1.setWon()
+            return;
+        }
+        player2.setWon()
+
+    }
+
     if (index == 1 || index == 4 || index == 7) {
-        //check if all three vertical cells are filled with either x's oder o's
-        if (gameBoard.getBoard()[0] == gameBoard.getBoard()[3] && gameBoard.getBoard()[0] == gameBoard.getBoard()[6]) {
-            if (sign == "X") {
-                player1.setWon()
-                return;
-            }
-            player2.setWon()
-            //check if all three horicontal cells are filled with either x's oder o's
-        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 1]) {
+        //check if all three horicontal cells are filled with either x's oder o's
+        if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 1]) {
             if (sign == "X") {
                 player1.setWon()
             }
@@ -96,15 +101,8 @@ function playRound(sign) {
 
 
     if (index == 8 || index == 5 || index == 2) {
-        //check if all three vertical cells are filled with either x's oder o's
-        if (gameBoard.getBoard()[7] == gameBoard.getBoard()[4] && gameBoard.getBoard()[7] == gameBoard.getBoard()[1]) {
-            if (sign == "X") {
-                player1.setWon()
-                return;
-            }
-            player2.setWon()
-            //check if all three horicontal cells are filled with either x's oder o's
-        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index]) {
+        //check if all three horicontal cells are filled with either x's oder o's
+        if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index]) {
             if (sign == "X") {
                 player1.setWon()
             }
@@ -115,15 +113,8 @@ function playRound(sign) {
 
 
     if (index == 9 || index == 6 || index == 3) {
-        //check if all three vertical cells are filled with either x's oder o's
-        if (gameBoard.getBoard()[8] == gameBoard.getBoard()[5] && gameBoard.getBoard()[8] == gameBoard.getBoard()[2]) {
-            if (sign == "X") {
-                player1.setWon()
-                return;
-            }
-            player2.setWon()
-            //check if all three horicontal cells are filled with either x's oder o's
-        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 3]) {
+        //check if all three horicontal cells are filled with either x's oder o's
+        if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 3]) {
             if (sign == "X") {
                 player1.setWon()
             }
