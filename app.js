@@ -82,19 +82,35 @@ function playRound(sign) {
     if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 7]) {
         if (sign == "X") {
             player1.setWon()
+            drawBoard();
             return;
         }
         player2.setWon()
 
     }
 
+
+    //check if all three diagonal cells are filled with either x's oder o's
+    if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 5] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 9]) {
+        if (sign == "X") {
+            player1.setWon()
+            drawBoard();
+            return;
+        }
+        player2.setWon()
+
+    }
+
+
     if (index == 1 || index == 4 || index == 7) {
         //check if all three horicontal cells are filled with either x's oder o's
         if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 1]) {
             if (sign == "X") {
                 player1.setWon()
+            } else {
+                player2.setWon()
+
             }
-            player2.setWon()
         }
 
     }
@@ -105,8 +121,10 @@ function playRound(sign) {
         if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index]) {
             if (sign == "X") {
                 player1.setWon()
+            } else {
+                player2.setWon()
+
             }
-            player2.setWon()
         }
 
     }
@@ -117,8 +135,10 @@ function playRound(sign) {
         if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 3]) {
             if (sign == "X") {
                 player1.setWon()
+            } else {
+                player2.setWon()
+
             }
-            player2.setWon()
         }
 
     }
@@ -127,8 +147,6 @@ function playRound(sign) {
 
 
 }
-
-
 
 
 function playGame() {
