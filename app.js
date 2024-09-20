@@ -63,8 +63,6 @@ function checkEnd() {
 
 
 function playRound(sign) {
-    drawBoard();
-
     var index = prompt("At which number you want to set your sign?")
 
     if (index < 1 || index > gameBoard.getBoard().length) {
@@ -150,6 +148,7 @@ function playRound(sign) {
 
 
 function playGame() {
+    drawBoard();
     while (!player1.getWon() && !player2.getWon() && !checkEnd()) {
         player1.startRound(player1.getSign());
         if (checkEnd() || player1.getWon() || player2.getWon()) {
@@ -157,6 +156,8 @@ function playGame() {
         }
         player2.startRound(player2.getSign());
     }
+    drawBoard();
+
 
     if (player1.getWon()) {
         console.log(`${player1.getName()} won the game!`)
