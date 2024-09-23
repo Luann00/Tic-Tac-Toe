@@ -63,7 +63,8 @@ function checkEnd() {
 
 
 function playRound(sign) {
-    var index = prompt("At which number you want to set your sign?")
+    var number = prompt("At which number you want to set your sign?")
+    var index = Number(number);
 
     if (index < 1 || index > gameBoard.getBoard().length) {
         console.log("index:" + index)
@@ -75,74 +76,105 @@ function playRound(sign) {
     gameBoard.setField(index, sign);
 
 
+    let diagonalNumbers = [1, 5, 9, 7, 5, 3];
 
-    //check if all three vertical cells are filled with either x's oder o's
-    if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 7]) {
-        if (sign == "X") {
-            player1.setWon()
-            drawBoard();
+    if (diagonalNumbers.includes(index)) {
+        if (checkDiagonal(index, sign)) {
+
+        }
+    }
+
+
+    //to-do: create own method for the first check and call it in each if statement
+    if (index == 1 || index == 2 || index == 3) {
+        //check for vertical win
+        if (gameBoard.getBoard()[0] == gameBoard.getBoard()[1] && gameBoard.getBoard()[0] == gameBoard.getBoard()[2]) {
+            if (sign == "X") {
+                player1.setWon();
+            } else {
+                player2.setWon();
+            }
+            return;
+        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 5]) {
+            if (sign == "X") {
+                player1.setWon();
+            } else {
+                player2.setWon();
+            }
             return;
         }
-        player2.setWon()
-
     }
 
-
-    //check if all three diagonal cells are filled with either x's oder o's
-    if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 5] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 9]) {
-        if (sign == "X") {
-            player1.setWon()
-            drawBoard();
+    if (index == 4 || index == 5 || index == 6) {
+        //check for vertical win
+        if (gameBoard.getBoard()[3] == gameBoard.getBoard()[4] && gameBoard.getBoard()[3] == gameBoard.getBoard()[5]) {
+            if (sign == "X") {
+                player1.setWon();
+            } else {
+                player2.setWon();
+            }
+            return;
+        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4]) {
+            if (sign == "X") {
+                player1.setWon();
+            } else {
+                player2.setWon();
+            }
             return;
         }
-        player2.setWon()
 
     }
 
 
-    if (index == 1 || index == 4 || index == 7) {
-        //check if all three horicontal cells are filled with either x's oder o's
-        if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 1]) {
+    if (index == 7 || index == 8 || index == 9) {
+        //check for vertical win
+        if (gameBoard.getBoard()[6] == gameBoard.getBoard()[7] && gameBoard.getBoard()[6] == gameBoard.getBoard()[8]) {
             if (sign == "X") {
-                player1.setWon()
+                player1.setWon();
             } else {
-                player2.setWon()
-
+                player2.setWon();
             }
-        }
-
-    }
-
-
-    if (index == 8 || index == 5 || index == 2) {
-        //check if all three horicontal cells are filled with either x's oder o's
-        if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index]) {
+            return;
+        } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 7]) {
             if (sign == "X") {
-                player1.setWon()
+                player1.setWon();
             } else {
-                player2.setWon()
-
+                player2.setWon();
             }
-        }
-
-    }
-
-
-    if (index == 9 || index == 6 || index == 3) {
-        //check if all three horicontal cells are filled with either x's oder o's
-        if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 3]) {
-            if (sign == "X") {
-                player1.setWon()
-            } else {
-                player2.setWon()
-
-            }
+            return;
         }
 
     }
 
     drawBoard();
 
+
+}
+
+
+function checkDiagonal(index, sign) {
+
+    if (index == 1 || index == 5 || index == 9) {
+        if (gameBoard.getBoard()[0] == gameBoard.getBoard()[4] && gameBoard.getBoard()[0] == gameBoard.getBoard()[8]) {
+            if (sign == "X") {
+                player1.setWon();
+            } else {
+                player2.setWon();
+            }
+            return true;
+        }
+    } else if (index == 7 || index == 5 || index == 3) {
+        if (gameBoard.getBoard()[6] == gameBoard.getBoard()[4] && gameBoard.getBoard()[6] == gameBoard.getBoard()[2]) {
+            if (sign == "X") {
+                player1.setWon();
+            } else {
+                player2.setWon();
+            }
+            return true;
+        }
+    }
+
+    return false;
 
 }
 
