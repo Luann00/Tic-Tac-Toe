@@ -163,7 +163,8 @@ function checkDiagonal(index, sign) {
             }
             return true;
         }
-    } else if (index == 7 || index == 5 || index == 3) {
+    }
+    if (index == 7 || index == 5 || index == 3) {
         if (gameBoard.getBoard()[6] == gameBoard.getBoard()[4] && gameBoard.getBoard()[6] == gameBoard.getBoard()[2]) {
             if (sign == "X") {
                 player1.setWon();
