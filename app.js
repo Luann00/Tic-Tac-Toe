@@ -8,6 +8,7 @@ let gameBoard = (function () {
     const setField = (index, symbol) => {
         if (index >= 1 && index <= board.length && board[index - 1] == "") {
             board[index - 1] = symbol;
+            setSignUI(index, sign)
         }
     };
 
@@ -61,16 +62,73 @@ function checkEnd() {
     return true;
 }
 
+function startNewRound(sign) {
+
+}
+
 
 function playRound(sign) {
-    var number = prompt("At which number you want to set your sign?")
-    var index = Number(number);
 
-    if (index < 1 || index > gameBoard.getBoard().length) {
-        console.log("index:" + index)
-        alert("Only valid numbers");
-        return
-    }
+    let button1 = document.querySelector("#btn1");
+    let button2 = document.querySelector("#btn2");
+    let button3 = document.querySelector("#btn3");
+    let button4 = document.querySelector("#btn4");
+    let button5 = document.querySelector("#btn5");
+    let button6 = document.querySelector("#btn6");
+    let button7 = document.querySelector("#btn7");
+    let button8 = document.querySelector("#btn8");
+    let button9 = document.querySelector("#btn9");
+
+    let index = 0;
+
+
+    button1.addEventListener('click', () => {
+        button1.innerHTML = sign;
+        index = 1;
+    });
+
+    button2.addEventListener('click', () => {
+        button2.innerHTML = sign;
+        index = 2;
+
+    });
+    button3.addEventListener('click', () => {
+        button3.innerHTML = sign;
+        index = 3;
+
+    });
+    button4.addEventListener('click', () => {
+        button4.innerHTML = sign;
+        index = 4;
+
+    });
+    button5.addEventListener('click', () => {
+        button5.innerHTML = sign;
+        index = 5;
+
+    });
+    button6.addEventListener('click', () => {
+        button6.innerHTML = sign;
+        index = 6;
+
+    });
+    button7.addEventListener('click', () => {
+        button7.innerHTML = sign;
+        index = 7;
+
+    });
+    button8.addEventListener('click', () => {
+        button8.innerHTML = sign;
+        index = 8;
+
+    });
+    button9.addEventListener('click', () => {
+        button1.innerHTML = sign;
+        index = 9;
+
+    });
+
+
 
 
     gameBoard.setField(index, sign);
@@ -201,6 +259,9 @@ function playGame() {
     }
 
 }
+
+
+
 
 playGame();
 
