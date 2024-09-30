@@ -11,7 +11,6 @@
     bottom: 0;
     right: 0;
     overflow: auto;
-
 }
 
 .buttons {
@@ -22,12 +21,21 @@
 
 
 button {
-    font-size:5vw;
     height: 200px;
     width: 200px;
-    border: 1px solid #555;
+    border: 1px solid;
+    font-size:3vw;
 }
 
 #winnerText {
     font-size: 2vw;
+}
+
+#resetButton {
+    font-size:1vw;
+    height: 50px;
+    width: 150px;
+    margin-top: 1%;
+    border: 1px solid #555;
+
 }

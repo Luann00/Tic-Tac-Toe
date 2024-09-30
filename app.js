@@ -10,6 +10,16 @@ let button9 = document.querySelector("#btn9");
 
 
 
+let resetButton = document.createElement("button");
+resetButton.id= "resetButton"
+
+
+let container = document.querySelector('.container')
+
+
+
+
+
 
 
 
@@ -19,6 +29,8 @@ let gameBoard = (function () {
     let board = ["", "", "", "", "", "", "", "", ""]
 
     let getBoard = () => board;
+
+    let clearBoard = () => board = ["", "", "", "", "", "", "", "", ""]
 
 
     //Method for overwriting the field
@@ -31,7 +43,7 @@ let gameBoard = (function () {
     const getField = (index) => board[index]
 
 
-    return { getBoard, setField, getField }
+    return { getBoard, setField, getField, clearBoard }
 
 })();
 
@@ -54,7 +66,7 @@ createPlayer = (name, sign) => {
     let won = false;
 
     let getWon = () => won
-    let setWon = () => won = true;
+    let setWon = (hasWon) => won = hasWon;
     let getName = () => name;
     let getSign = () => sign;
 
@@ -81,82 +93,102 @@ function checkEnd() {
 }
 
 button1.addEventListener('click', () => {
-    button1.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 1)
+    if (button1.innerHTML == "") {
+        button1.innerHTML = currentPlayer.getSign();
+        playRound(1)
+    }
+
 });
 
 button2.addEventListener('click', () => {
-    button2.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 2)
+    if (button2.innerHTML == "") {
+        button2.innerHTML = currentPlayer.getSign();
+        playRound(2)
+    }
 
 });
 button3.addEventListener('click', () => {
-    button3.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 3)
+    if (button3.innerHTML == "") {
+        button3.innerHTML = currentPlayer.getSign();
+        playRound(3)
+    }
 
 });
 button4.addEventListener('click', () => {
-    button4.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 4)
+    if (button4.innerHTML == "") {
+        button4.innerHTML = currentPlayer.getSign();
+        playRound(4)
+    }
 
 });
 button5.addEventListener('click', () => {
-    button5.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 5)
-
+    if (button5.innerHTML == "") {
+        button5.innerHTML = currentPlayer.getSign();
+        playRound(5)
+    }
 });
 button6.addEventListener('click', () => {
-    button6.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 6)
+    if (button6.innerHTML == "") {
+        button6.innerHTML = currentPlayer.getSign();
+        playRound(6)
+    }
 
 });
 button7.addEventListener('click', () => {
-    button7.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 7)
+    if (button7.innerHTML == "") {
+        button7.innerHTML = currentPlayer.getSign();
+        playRound(7)
+    }
 
 });
 button8.addEventListener('click', () => {
-    button8.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 8)
+    if (button8.innerHTML == "") {
+        button8.innerHTML = currentPlayer.getSign();
+        playRound(8)
+    }
 
 });
 button9.addEventListener('click', () => {
-    button9.innerHTML = currentPlayer.getSign();
-    playRound(currentPlayer.getSign(), 9)
+    if (button9.innerHTML == "") {
+        button9.innerHTML = currentPlayer.getSign();
+        playRound(9)
+    }
 
 });
 
+resetButton.addEventListener('click', () => {
+    clearGame()
+});
 
-function playRound(sign, index) {
+
+
+
+function playRound(index) {
 
     gameBoard.setField(currentPlayer.getSign(), index);
 
     let diagonalNumbers = [1, 5, 9, 7, 5, 3];
 
     if (diagonalNumbers.includes(index)) {
-        if (checkDiagonal(index, currentPlayer.getSign())) {
-
+        if (checkDiagonal(index)) {
+            currentPlayer.setWon(true);
+            return;
         }
     }
 
 
     //to-do: create own method for the first check and call it in each if statement
     if (index == 1 || index == 2 || index == 3) {
-        //check for vertical win
+        //check for horicontal win
         if (gameBoard.getBoard()[0] == gameBoard.getBoard()[1] && gameBoard.getBoard()[0] == gameBoard.getBoard()[2]) {
-            if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
-            } else {
-                currentPlayer.setWon();
-            }
-            announceWinner()
+            currentPlayer.setWon(true);
+            announceWinner();
             return;
+            //check for vertical win
+
         } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 5]) {
-            if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
-            } else {
-                currentPlayer.setWon();
-            }
+            currentPlayer.setWon(true);
+            announceWinner();
             return;
         }
     }
@@ -165,18 +197,15 @@ function playRound(sign, index) {
         //check for vertical win
         if (gameBoard.getBoard()[3] == gameBoard.getBoard()[4] && gameBoard.getBoard()[3] == gameBoard.getBoard()[5]) {
             if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
+                currentPlayer.setWon(true);
             } else {
-                currentPlayer.setWon();
+                currentPlayer.setWon(true);
             }
             announceWinner();
             return;
         } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index + 2] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4]) {
-            if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
-            } else {
-                currentPlayer.setWon();
-            }
+            currentPlayer.setWon(true);
+            announceWinner();
             return;
         }
 
@@ -186,19 +215,14 @@ function playRound(sign, index) {
     if (index == 7 || index == 8 || index == 9) {
         //check for vertical win
         if (gameBoard.getBoard()[6] == gameBoard.getBoard()[7] && gameBoard.getBoard()[6] == gameBoard.getBoard()[8]) {
-            if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
-            } else {
-                currentPlayer.setWon();
-            }
+            currentPlayer.setWon(true);
+
             announceWinner()
             return;
         } else if (gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 4] && gameBoard.getBoard()[index - 1] == gameBoard.getBoard()[index - 7]) {
-            if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
-            } else {
-                currentPlayer.setWon();
-            }
+            currentPlayer.setWon(true);
+            announceWinner()
+
             return;
         }
 
@@ -218,14 +242,14 @@ function playRound(sign, index) {
 }
 
 
-function checkDiagonal(index, sign) {
+function checkDiagonal(index) {
 
     if (index == 1 || index == 5 || index == 9) {
         if (gameBoard.getBoard()[0] == gameBoard.getBoard()[4] && gameBoard.getBoard()[0] == gameBoard.getBoard()[8]) {
             if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
+                currentPlayer.setWon(true);
             } else {
-                currentPlayer.setWon();
+                currentPlayer.setWon(true);
             }
             announceWinner()
             return true;
@@ -234,9 +258,9 @@ function checkDiagonal(index, sign) {
     if (index == 7 || index == 5 || index == 3) {
         if (gameBoard.getBoard()[6] == gameBoard.getBoard()[4] && gameBoard.getBoard()[6] == gameBoard.getBoard()[2]) {
             if (currentPlayer.getSign() == "X") {
-                currentPlayer.setWon();
+                currentPlayer.setWon(true);
             } else {
-                currentPlayer.setWon();
+                currentPlayer.setWon(true);
             }
 
             announceWinner()
@@ -276,8 +300,48 @@ function disableAllButtons() {
     button8.disabled = true;
     button9.disabled = true;
 
-
     document.querySelector("#winnerText").innerHTML = `${currentPlayer.getName()} won the game!`;
+
+    container.appendChild(resetButton)
+    resetButton.innerHTML ="Reset game"
+
+}
+
+function clearGame() {
+
+    button1.disabled = false;
+    button2.disabled = false;
+    button3.disabled = false;
+    button4.disabled = false;
+    button5.disabled = false;
+    button6.disabled = false;
+    button7.disabled = false;
+    button8.disabled = false;
+    button9.disabled = false;
+
+    document.querySelector("#winnerText").innerHTML = ""
+
+    gameBoard.clearBoard();
+    button1.innerHTML ="";
+    button2.innerHTML ="";
+    button3.innerHTML ="";
+    button4.innerHTML ="";
+    button5.innerHTML ="";
+    button6.innerHTML ="";
+    button7.innerHTML ="";
+    button8.innerHTML ="";
+    button9.innerHTML ="";
+
+
+    currentPlayer.setWon(false);
+    currentPlayer = player1;
+
+
+    container.removeChild(resetButton)
+
+
+
+
 
 }
 
