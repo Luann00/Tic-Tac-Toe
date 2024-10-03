@@ -74,8 +74,8 @@ createPlayer = (name, sign) => {
     return { getName, getSign, playRound, getWon, setWon, startRound }
 }
 
-let player1 = createPlayer("Luan", "X");
-let player2 = createPlayer("Bot", "O");
+let player1 = createPlayer("Player 1", "X");
+let player2 = createPlayer("Player 2", "O");
 let currentPlayer = player1
 
 
