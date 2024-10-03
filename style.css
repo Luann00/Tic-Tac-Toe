@@ -15,16 +15,16 @@
 
 .buttons {
     display: grid;
-    grid-template-rows: 200px 200px 200px;
-    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 150px 150px 150px;
+    grid-template-columns: 150px 150px 150px;
 }
 
 
 button {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     border: 1px solid;
-    font-size:3vw;
+    font-size: 3vw;
 }
 
 #winnerText {
@@ -32,7 +32,7 @@ button {
 }
 
 #resetButton {
-    font-size:1vw;
+    font-size: 1vw;
     height: 50px;
     width: 150px;
     margin-top: 1%;
